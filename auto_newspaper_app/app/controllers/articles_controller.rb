@@ -1,10 +1,16 @@
 class ArticlesController < ApplicationController
 
   def index
-
     lastRefresh = Article.first[:created_at]
+
+    puts '====='
+    puts lastRefresh
+    puts 12.hours.ago
+    puts lastRefresh < 12.hours.ago
+    puts '====='
+
     articles = []
-      if lastRefresh > 12.hours.ago
+      if lastRefresh < 12.hours.ago
 
       # nuke the table
       Article.destroy_all
@@ -15,21 +21,26 @@ class ArticlesController < ApplicationController
 
       # loop through the links and do something.
       links =  page.css('a.read_post_link')
-      for link in links do
+
+      for link in links[1..10] do
+
         # articles.push(link.attributes['href'].value)
-        response = HTTParty.get(links[0].attributes['href'].value)
+        response = HTTParty.get(link.attributes['href'].value)
         page = Nokogiri::HTML(response.body)
 
         # where we'll store the paragraphs
-        parsedBody = ''
+        parsedBody = []
 
-        #ignore brs and unneded linebreaks?
-        page.css('#\31 1256816 > div.entry__container > div > div.entry__body.js-entry-body > div:nth-child(1) > p').children.each {
-          |item|
-          if item.text != '' && item.text != '\n '
-            parsedBody += item.text
-          end
-        }
+        page.css('div.entry__body p').each do |item|
+
+          parsedBody.push(item.text)
+
+        end
+
+        # pop those last two pesky things
+        parsedBody.pop()
+        parsedBody.pop()
+
 
         # build and object
         article = {
@@ -40,10 +51,11 @@ class ArticlesController < ApplicationController
         # pp article[:body]
         articles.push(article)
 
+      end #end for
+
         #save them to the database
         Article.create(articles)
 
-      end #end for
     end #end if
 
     render json: Article.all
