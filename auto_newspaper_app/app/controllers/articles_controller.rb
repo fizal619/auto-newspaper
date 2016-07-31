@@ -1,10 +1,10 @@
 class ArticlesController < ApplicationController
 
   def index
-    #check the current time's hour value
-    d = DateTime.parse(Time.now.to_s)
+
+    lastRefresh = Article.first[:created_at]
     articles = []
-      if d.hour < 6
+      if lastRefresh > 12.hours.ago
 
       # nuke the table
       Article.destroy_all
