@@ -9,7 +9,7 @@ import {
   AppRegistry,
 } from 'react-native';
 
-import { Container, Header, Title, Content } from 'native-base';
+import { Container, Header, Button, Icon, Title, Content } from 'native-base';
 
 
 import ArticleList from './views/ArticleList'
@@ -23,7 +23,9 @@ class auto_newspaper extends Component {
       news: [{
         title: 'loading',
         content: 'loading'
-      }]
+      }],
+      article: false,
+      which_article: 0
     }
   }
 
@@ -32,18 +34,35 @@ class auto_newspaper extends Component {
       this.setState({
         news: res
       })
-      console.log(res[0])
+      console.log(res.length)
     })
   }
 
   render() {
+
+    let VIEW
+
+    if(this.state.article){
+      VIEW = <ArticleList news={this.state.news} />
+    }else{
+      VIEW = <Article news={this.state.news[this.state.which_article]} />
+    }
+
     return (
       <Container>
       <Header>
+        <Button transparent>
+         Back
+        </Button>
         <Title>Latest News</Title>
+        <Button transparent>
+         Refresh
+        </Button>
       </Header>
       <Content>
-        <ArticleList news={this.state.news} />
+
+        {VIEW}
+
       </Content>
       </Container>
     )

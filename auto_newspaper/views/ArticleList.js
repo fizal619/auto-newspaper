@@ -1,26 +1,21 @@
 import React, { Component } from 'react';
-import { Card, CardItem, Text} from 'native-base';
+import { Card, CardItem, Text, List, ListItem} from 'native-base';
 
 
 const ArticleList =props=> {
 
-  // function list(){
-  //   props.news.forEach(item=>{
-  //     render(){
-  //       return(
-  //         <Text>{item.title}</Text>
-  //         )
-  //     }
-  //   })
-  // }
+  console.log(props.news.length)
 
 
   return (
-        <Card>
-          <CardItem>
-            <Text> {props.news[0].title} </Text>
-          </CardItem>
-        </Card>
+    <List dataArray={props.news}
+      renderRow={(item) =>
+        <ListItem>
+          <Text>{item.title}</Text>
+        </ListItem>
+    }>
+
+    </List>
     )
 
 }
