@@ -7,10 +7,12 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View
 } from 'react-native';
+
+import { Container, Header, Title, Content } from 'native-base';
+
+
+import ArticleList from './views/ArticleList'
 
 class auto_newspaper extends Component {
 
@@ -18,7 +20,10 @@ class auto_newspaper extends Component {
     super();
 
     this.state ={
-      news: 'test'
+      news: [{
+        title: 'loading',
+        content: 'loading'
+      }]
     }
   }
 
@@ -27,44 +32,41 @@ class auto_newspaper extends Component {
       this.setState({
         news: res
       })
+      console.log(res[0])
     })
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload balls,{'\n'}
-          Cmd+D or shake for dev menu {this.state.news[0].title}
-        </Text>
-      </View>
-    );
+      <Container>
+      <Header>
+        <Title>Latest News</Title>
+      </Header>
+      <Content>
+        <ArticleList news={this.state.news} />
+      </Content>
+      </Container>
+    )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#F5FCFF',
+//   },
+//   welcome: {
+//     fontSize: 20,
+//     textAlign: 'center',
+//     margin: 10,
+//   },
+//   instructions: {
+//     textAlign: 'center',
+//     color: '#333333',
+//     marginBottom: 5,
+//   },
+// });
 
 AppRegistry.registerComponent('auto_newspaper', () => auto_newspaper);
