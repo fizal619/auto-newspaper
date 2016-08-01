@@ -6,11 +6,11 @@ class ArticlesController < ApplicationController
     puts '====='
     puts lastRefresh
     puts 12.hours.ago
-    puts lastRefresh < 12.hours.ago
+    puts lastRefresh > 12.hours.ago
     puts '====='
 
     articles = []
-      if lastRefresh < 12.hours.ago
+      if lastRefresh > 12.hours.ago
 
       # nuke the table
       Article.destroy_all
