@@ -4,14 +4,17 @@ import { Card, CardItem, Text, List, ListItem} from 'native-base';
 
 const ArticleList =props=> {
 
-  console.log(props.news.length)
+  // console.log(props.news.length)
 
+  function update(e){
+    props.update(e)
+  }
 
   return (
     <List dataArray={props.news}
-      renderRow={(item) =>
+      renderRow={(item, id) =>
         <ListItem>
-          <Text>{item.title}</Text>
+          <Text onPress={()=>update(item)}>{item.title}</Text>
         </ListItem>
     }>
 

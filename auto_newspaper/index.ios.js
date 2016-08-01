@@ -13,6 +13,7 @@ import { Container, Header, Button, Icon, Title, Content } from 'native-base';
 
 
 import ArticleList from './views/ArticleList'
+import Article from './views/Article'
 
 class auto_newspaper extends Component {
 
@@ -24,8 +25,7 @@ class auto_newspaper extends Component {
         title: 'loading',
         content: 'loading'
       }],
-      article: false,
-      which_article: 0
+      article: undefined
     }
   }
 
@@ -38,14 +38,25 @@ class auto_newspaper extends Component {
     })
   }
 
+  //MY FUNCTIONS TO MANIPULATE STATE
+
+  selectArticle(item){
+    console.log(item)
+    this.setState({
+      article: item
+    })
+  }
+
+  //END
+
   render() {
 
     let VIEW
 
-    if(this.state.article){
-      VIEW = <ArticleList news={this.state.news} />
+    if(this.state.article === undefined){
+      VIEW = <ArticleList update={this.selectArticle.bind(this)} news={this.state.news} />
     }else{
-      VIEW = <Article news={this.state.news[this.state.which_article]} />
+      VIEW = <Article article={this.state.article} />
     }
 
     return (
