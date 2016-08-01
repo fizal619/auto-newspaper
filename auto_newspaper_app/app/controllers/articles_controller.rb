@@ -29,17 +29,17 @@ class ArticlesController < ApplicationController
         page = Nokogiri::HTML(response.body)
 
         # where we'll store the paragraphs
-        parsedBody = []
+        parsedBody = ''
 
         page.css('div.entry__body p').each do |item|
-
-          parsedBody.push(item.text)
-
+          if item.text != ''
+            parsedBody += item.text
+          end
         end
 
         # pop those last two pesky things
-        parsedBody.pop()
-        parsedBody.pop()
+        # parsedBody.pop()
+        # parsedBody.pop()
 
 
         # build and object

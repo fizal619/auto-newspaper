@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardItem, Text, List, ListItem} from 'native-base';
+import { Card, CardItem, Text, List, ListItem, Content, Button} from 'native-base';
 
 
 const ArticleList =props=> {
@@ -11,14 +11,20 @@ const ArticleList =props=> {
   }
 
   return (
+    <Content>
     <List dataArray={props.news}
-      renderRow={(item, id) =>
+      renderRow={(item) =>
         <ListItem>
           <Text onPress={()=>update(item)}>{item.title}</Text>
         </ListItem>
     }>
 
     </List>
+    <Text></Text>
+    <Text style={{textAlign: 'center'}}>
+      <Button style={{width:100, height: 50}} primary onPress={props.refresh} >Refresh</Button>
+    </Text>
+    </Content>
     )
 
 }

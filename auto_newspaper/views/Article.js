@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardItem, Text, List, ListItem} from 'native-base';
+import { Card, CardItem, Text, List, ListItem, Button, Content} from 'native-base';
 
 
 const Article =props=> {
@@ -8,6 +8,7 @@ const Article =props=> {
 
 
   return (
+    <Content>
     <Card>
       <CardItem header>
         <Text>{props.article.title.slice(0, 44) + '...'}</Text>
@@ -16,6 +17,11 @@ const Article =props=> {
         <Text>{props.article.content}</Text>
       </CardItem>
     </Card>
+    <Text></Text>
+    <Text style={{textAlign: 'center'}}>
+      <Button style={{width:100, height: 50}} primary onPress={props.reset} >Back</Button>
+    </Text>
+    </Content>
     )
 
 }
