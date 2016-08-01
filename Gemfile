@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 #my gems
 gem 'nokogiri'
 gem 'httparty'
+gem 'rack-cors', '~> 0.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
