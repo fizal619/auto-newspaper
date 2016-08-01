@@ -66,7 +66,7 @@ class auto_newspaper extends Component {
   }
 
   refresh(){
-    fetch('http://localhost:3000/news').then(data=> data.json()).then(res=>{
+    fetch('https://peaceful-forest-67246.herokuapp.com/news').then(data=> data.json()).then(res=>{
       this.setState({
         news: res
       })
