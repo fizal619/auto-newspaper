@@ -18,7 +18,7 @@ const Article =props=> {
       </CardItem>
     </Card>
     <Text></Text>
-
+    <Button style={{width:100, height: 50}} primary onPress={props.reset} >Back</Button>
     </Content>
     )
 

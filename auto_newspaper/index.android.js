@@ -67,36 +67,28 @@ class auto_newspaper extends Component {
 
   refresh(){
 
-    let myHeaders = new Headers({
-      "Referer": "https://peaceful-forest-67246.herokuapp.com/",
-      "Origin": "https://peaceful-forest-67246.herokuapp.com/",
-      "Access-Control-Allow-Origin": "https://peaceful-forest-67246.herokuapp.com/",
-    })
-
-    let options = {
-      mode: 'cors',
-      headers: myHeaders
-    }
-
     console.log('Number 1')
-    fetch('https://peaceful-forest-67246.herokuapp.com/news', options).then(data=> data.json()).then(res=>{
+    fetch('https://peaceful-forest-67246.herokuapp.com/news').then(data=> data.json()).then(res=>{
       this.setState({
         news: res
-      }).catch(err=>{
+      })
+
+      console.log(res.length)
+      try {
+        AsyncStorage.setItem("articles", JSON.stringify(res));
+      } catch (error) {
+        console.log('Number 3')
+        console.log(error)
+      }
+
+    })
+    .catch(err=>{
         console.log('Number 2')
 
         console.log(err)
       })
-      console.log(res.length)
-      try {
 
-        AsyncStorage.setItem("articles", JSON.stringify(res));
-      } catch (error) {
-        console.log('Number 3')
 
-        console.log(error)
-      }
-    })
   }
 
   //END
