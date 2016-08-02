@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
       # loop through the links and do something.
       links =  page.css('a.read_post_link')
 
-      for link in links[1..10] do
+      for link in links[1..20] do
 
         # articles.push(link.attributes['href'].value)
         response = HTTParty.get(link.attributes['href'].value)
