@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
     puts '====='
 
     articles = []
-    if lastRefresh < 12.hours.ago
+    # if lastRefresh < 12.hours.ago
 
       # nuke the table
       Article.destroy_all
@@ -56,7 +56,7 @@ class ArticlesController < ApplicationController
         #save them to the database
         Article.create(articles)
 
-    end #end if
+    # end #end if
 
     render json: Article.all
   end
